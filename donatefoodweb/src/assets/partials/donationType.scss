@@ -1,0 +1,32 @@
+$color:rgb(135, 210, 30);
+body{
+    justify-content: center;
+    
+}
+.donationType {
+
+    h2 {
+        text-align: center;
+        font-weight: bold;
+        color:rgb(135, 210, 30);
+
+        // @include media(mobile) {
+        //     font-size: 1.5rem;
+        // }
+    }
+
+    GradientButton{
+     
+       border-width: 2px;
+
+        
+       // display: flex;
+       // margin: auto;
+        
+
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Acme&family=Special+Elite&display=swap');
+    label{
+        font-family:'Acme'
+    }
+}
