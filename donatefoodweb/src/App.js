@@ -18,6 +18,7 @@ import ProtectedRoute from './ProtectedRoute';
 
 import Requests from './pages/Requests/Requests';
 import { useEffect, useState } from 'react';
+import InstantDonation from './pages/InstantDonation';
 
 
 
@@ -65,13 +66,14 @@ function App() {
      <Route path="/services" element={<Services/>}/>
      <Route path="/contact" element={<Contact/>}/>
      
-     <Route  path="/login" element={<Login/>} auth={auth1}/>
-     <Route  path="/register" element={<Register/>} auth={auth1}/>
-     <Route  path="/donateDash" element={<DonateDash/>} auth={auth}/>
-     <Route  path="/donationForm" element={<DonationForm/>} auth={auth}/>
-     <Route path="/donationType" element={<DonationType/>} auth={auth}/>
-     <Route path="/requests" element={<Requests/>} auth={auth}/>
-     <Route  path="/logout" element={<Logout/>} auth={auth}/>
+     <Route  path="/login" element={<Login/>} auth={auth}/>
+     <Route  path="/register" element={<Register/>} auth={auth}/>
+     <Route  path="/donateDash" element={<DonateDash/>} auth={auth1}/>
+     <Route  path="/donationForm" element={<DonationForm/>} auth={auth1}/>
+     <Route  path="/instantDonation" element={<InstantDonation/>} auth={auth1}/>
+     <Route path="/donationType" element={<DonationType/>} auth={auth1}/>
+     <Route path="/requests" element={<Requests/>} auth={auth1}/>
+     <Route  path="/logout" element={<Logout/>} auth={auth1}/>
      
      </Routes>
    

@@ -2,6 +2,7 @@ import React from 'react'
 import {Col,Row,Button} from 'react-bootstrap';
 import '../assets/partials/donationType.scss';
 import GradientButton from 'react-linear-gradient-button'
+import { NavLink } from 'react-router-dom';
 
 
 const DonationType =() => {
@@ -14,7 +15,7 @@ const DonationType =() => {
            <center>
               {/* <GradientButton colors={['#4c669f', '#3b5998', '#192f6a']}>  */}
 
-              <GradientButton >Instant Donation</GradientButton>
+              <NavLink to="/instantDonation"><GradientButton  >Instant Donation</GradientButton></NavLink> 
         </center>
      </Col>
      <Col xs={12} className='md-5 my-3'>

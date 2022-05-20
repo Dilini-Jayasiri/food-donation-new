@@ -34,7 +34,7 @@ const NavBar = (props) => {
               </li>
             </ul>
 
-            {props.auth ?
+            {props.auth?
             <>
             <NavLink className="navbar-brand fw-bolder fs-1 mx-auto" to="#">Food Donation</NavLink>
             <NavLink to="/login" className="btn btn-outline-primary ms-auto px-4 rounded-pill">
