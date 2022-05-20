@@ -32,20 +32,22 @@ export default function Requests() {
         <h1>Requests</h1>
       </Box>
 
-      <Box mx={10} my={4} pt={3}>
+      <Box ml={10} marginRight={5} my={4} pt={3}>
        
         <Paper className={classes.pageContent} >
           <ThemeProvider theme={theme}>
             {/* <Box width={'60%'}> */}
               {/* <Grid item={center}> */}
+              <Box ml={10} marginRight={5} pt={3}>
             <RequestForm />
+            </Box>
             {/* </Grid> */}
             {/* </Box> */}
           </ThemeProvider>
 
         </Paper>
         
-      </Box>
+     </Box>
     </>
   )
 }

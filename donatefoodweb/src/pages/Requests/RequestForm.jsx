@@ -5,7 +5,7 @@ import Controls from '../../components/controls/Controls'
 
 import { useForm, Form } from '../../components/useForm';
 import * as orgType from '../../organizations/orgType'
-import DatePicker1 from '../../components/controls/DatePicker1';
+//import DatePicker1 from '../../components/controls/DatePicker1';
 
 
 const mealTypeItems = [
@@ -40,7 +40,7 @@ export default function RequestForm() {
         // <Grid container  alignItems="center" justify="center">
         <Form>
             <div>
-                <Grid container spacing={4}>
+                <Grid container>
                     <Grid item xs={6}>
                         <Box my={4} mx={4}>
                             <Controls.Input
@@ -94,17 +94,7 @@ export default function RequestForm() {
                     </Grid>
 
                     <Grid item xs={6}>
-                        <Box my={4} mx={4}>
-                            <Controls.RadioGroups
-                                name="mealType"
-                                label="Meal Type"
-                                value={values.mealType}
-                                onChange={handleInputChange}
-                                items={mealTypeItems}
-                            />
-                        </Box>
-
-                        <Box my={4} mx={4}>
+                    <Box my={4} mx={4}>
                             <Controls.Input
 
                                 label="Quantity"
@@ -134,6 +124,17 @@ export default function RequestForm() {
                                 onChange={handleInputChange}
                             />
                         </Box>
+                        <Box my={4} mx={4}>
+                            <Controls.RadioGroups
+                                name="mealType"
+                                label="Meal Type"
+                                value={values.mealType}
+                                onChange={handleInputChange}
+                                items={mealTypeItems}
+                            />
+                        </Box>
+
+                       
 
                         {/* <Controls.DatePicker
                 name="confirmedDate"

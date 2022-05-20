@@ -9,7 +9,7 @@ const Controls = {
     Input,
     RadioGroups,
     Selects,
-    TextArea,
+    TextArea
    // DatePicker1
 }
 
