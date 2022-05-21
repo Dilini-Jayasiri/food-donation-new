@@ -5,7 +5,7 @@ import Controls from '../../components/controls/Controls'
 
 import { useForm, Form } from '../../components/useForm';
 import * as orgType from '../../organizations/orgType'
-//import DatePicker1 from '../../components/controls/DatePicker1';
+import DatePicker1 from '../../components/controls/DatePicker1';
 
 
 const mealTypeItems = [
@@ -30,15 +30,50 @@ const initialValues = {
 }
 export default function RequestForm() {
 
+    const validate = (fieldValues = values) => {
+        let temp = {...errors}
+        if('orgName' in fieldValues)
+        temp.orgName = fieldValues.orgName?"":"This field is required."
+        if('orgEmail' in fieldValues)
+        temp.orgEmail = (/$^|.+@.+..+/).test(values.orgEmail)?"":"Email is not valid."
+        if('orgSize' in fieldValues)
+        temp.orgSize = fieldValues.orgSize?"":"This field is required."
+        if('phone' in fieldValues)
+        temp.phone = fieldValues.phone.length>9?"":"Minimum 10 numbers required."
+        if('city' in fieldValues)
+        temp.city = fieldValues.city?"":"This field is required."
+        if('quantity' in fieldValues)
+        temp.quantity = fieldValues.quantity?"":"This field is required."
+        if('orgTypeId' in fieldValues)
+        temp.orgTypeId = fieldValues.orgTypeId.length!=0?"":"This field is required."
+        setErrors({
+            ...temp
+        })
+
+        if(fieldValues === values)
+        return Object.values(temp).every(x => x == "")
+    }
+
     const {
         values,
         setValues,
-        handleInputChange
-    } = useForm(initialValues);
+        errors,
+        setErrors,
+        handleInputChange,
+        resetForm
+    } = useForm(initialValues,true,validate);
+ 
 
+    const handleSubmit = e =>{
+        e.preventDefault()
+        if(validate()){
+        orgType.insertRequests(values)
+        resetForm()
+        }
+    }
     return (
         // <Grid container  alignItems="center" justify="center">
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <div>
                 <Grid container>
                     <Grid item xs={6}>
@@ -48,6 +83,7 @@ export default function RequestForm() {
                                 label="Organization Name"
                                 value={values.orgName}
                                 onChange={handleInputChange}
+                                error={errors.orgName}
                             />
                         </Box>
 
@@ -58,6 +94,7 @@ export default function RequestForm() {
                                 name="orgEmail"
                                 value={values.orgEmail}
                                 onChange={handleInputChange}
+                                error={errors.orgEmail}
                             />
                         </Box>
 
@@ -68,6 +105,7 @@ export default function RequestForm() {
                                 name="orgSize"
                                 value={values.orgSize}
                                 onChange={handleInputChange}
+                                error={errors.orgSize}
                             />
                         </Box>
 
@@ -78,6 +116,7 @@ export default function RequestForm() {
                                 name="phone"
                                 value={values.phone}
                                 onChange={handleInputChange}
+                                error={errors.phone}
                             />
                         </Box>
 
@@ -88,6 +127,7 @@ export default function RequestForm() {
                                 name="city"
                                 value={values.city}
                                 onChange={handleInputChange}
+                                error={errors.city}
                             />
                         </Box>
 
@@ -101,6 +141,7 @@ export default function RequestForm() {
                                 name="quantity"
                                 value={values.quantity}
                                 onChange={handleInputChange}
+                                error={errors.quantity}
                             />
                         </Box>
 
@@ -112,6 +153,7 @@ export default function RequestForm() {
                                 value={values.orgTypeId}
                                 onChange={handleInputChange}
                                 options={orgType.getOrgCollection()}
+                                error={errors.orgTypeId}
                             />
                         </Box>
 
@@ -135,14 +177,37 @@ export default function RequestForm() {
                         </Box>
 
                        
-
-                        {/* <Controls.DatePicker
+                        <Box my={4} mx={4}>
+                        <Controls.DatePicker1
                 name="confirmedDate"
                 label="Confirmed Date"
                 value={values.confirmedDate}
                 onChange={handleInputChange}
-                /> */}
+                /> 
+                </Box>
 {/* <DatePicker1/> */}
+                        <div >
+                        <Box my={4} mx={4}>
+                            <Controls.Button
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                type="submit"
+                                text="Submit"
+                                />
+                               
+
+                               
+                            <Controls.Button
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                type="submit"
+                                text="Reset"
+                                onClick={resetForm}
+                                />
+                                </Box> 
+                        </div>
                     </Grid>
                 </Grid>
             </div>

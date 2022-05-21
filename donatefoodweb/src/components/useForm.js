@@ -5,10 +5,11 @@ import { makeStyles} from '@material-ui/styles';
 import { ThemeProvider,createTheme } from '@material-ui/core/styles';
 
 
-export function useForm(initialValues) {
+export function useForm(initialValues,validateOnChange=false,validate) {
 
     
     const [values,setValues] = useState(initialValues);
+    const [errors,setErrors] = useState({});
 
     const handleInputChange = e =>{
         const {name,value} = e.target
@@ -16,12 +17,22 @@ export function useForm(initialValues) {
             ...values,
             [name]:value
         })
+        if(validateOnChange)
+        validate({[name] : value})
+    }
+
+    const resetForm = () => {
+      setValues(initialValues);
+      setErrors({})
     }
 
   return {
       values,
       setValues,
-      handleInputChange
+      errors,
+      setErrors,
+      handleInputChange,
+      resetForm
   }
       
   
@@ -52,9 +63,10 @@ const useStyles = makeStyles(() => ({
 export function Form(props) {
 
     const classes = useStyles();
+    const {children,...other} = props; 
 
   return (
-    <form  className={classes.root} autoComplete="off"> 
+    <form  className={classes.root} autoComplete="off" {...other}> 
    
     <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
 
