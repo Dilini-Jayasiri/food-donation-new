@@ -1,11 +1,13 @@
-import { Paper } from '@material-ui/core'
-import React from 'react'
+import { Paper, TableBody, TableCell, TableRow } from '@material-ui/core'
+import React, { useState } from 'react'
 
 import RequestForm from './RequestForm'
 //import { makeStyles } from '@mui/styles';
 import { makeStyles} from '@material-ui/styles';
 import { ThemeProvider,createTheme } from '@mui/material/styles';
 import { Box,Grid } from '@mui/material';
+import UseTable from "../../components/UseTable";
+import * as OrgType from "../../organizations/orgType";
 
 
 const theme = createTheme({
@@ -22,10 +24,28 @@ const useStyles = makeStyles((theme) => ({
   }
 ))
 
-
+const headCells = [
+  {id:'orgName',label:'Organization Name'},
+  {id:'orgType',label:'Organization Type'},
+  {id:'city',label:'City'},
+  {id:'phone',label:'Contact Number'},
+  {id:'orgEmail',label:'Email'},
+  {id:'quantity',label:'Needed Food Parcels'},
+]
 export default function Requests() {
 
+
   const classes = useStyles();
+  const [records,setRecords] = useState(OrgType.getAllRequests())
+
+  const {
+    TblContainer,
+    TblHead,
+    TblPagination,
+    recordsAfterPaginAndSorting
+
+  }=UseTable(records,headCells); 
+
   return (
       <>
       <Box mx={4} mt={4}>
@@ -38,11 +58,31 @@ export default function Requests() {
           <ThemeProvider theme={theme}>
             {/* <Box width={'60%'}> */}
               {/* <Grid item={center}> */}
-              <Box ml={10} marginRight={5} pt={3}>
+              {/* <Box ml={10} marginRight={5} pt={3}>
             <RequestForm />
-            </Box>
+            </Box> */}
             {/* </Grid> */}
             {/* </Box> */}
+
+            <TblContainer>
+              <TblHead className="tableHead"/>
+                 <TableBody>
+                   {
+                     recordsAfterPaginAndSorting().map(item => 
+                      (<TableRow key={item.id}>
+                        <TableCell>{item.orgName}</TableCell>
+                        <TableCell>{item.orgType}</TableCell>
+                        <TableCell>{item.city}</TableCell>
+                        <TableCell>{item.phone}</TableCell>
+                        <TableCell>{item.orgEmail}</TableCell>
+                        <TableCell>{item.quantity}</TableCell>
+
+                      </TableRow>))
+                   }
+                 </TableBody>
+
+            </TblContainer>
+            <TblPagination/>
           </ThemeProvider>
 
         </Paper>
